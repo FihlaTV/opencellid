@@ -1,0 +1,12 @@
+{
+  "name": "opencellid-server",
+  "description": "Self hosted OpenCellID instance",
+  "author": "Jan Jongboom <janjongboom@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janjongboom/opencellid"
+  },
+  "dependencies": {
+    "sqlite3": "^3.0.4"
+  }
+}

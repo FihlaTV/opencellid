@@ -1,34 +1,35 @@
 # opencellid
 
-An [OpenCellID](http://www.opencellid.org/) HTTP server using [Bottle](http://bottlepy.org/).
+An [OpenCellID](http://www.opencellid.org/) HTTP server, inspired by the original work
+from [Frédéric Junod](https://github.com/fredj/opencellid).
 
 ## Install
-Download and create an sqlite database from the csv data:
 
-    curl http://dump.opencellid.org/cellsIdData/cells.txt.gz | gunzip - > cells.txt
+Download and create an sqlite database from the csv data that you can get from
+http://opencellid.org/downloads/. The thing is that it now requires a login, so
+the best way is to download it from browser and store it as cells.txt.gz in this folder.
+If you want to run this on a server then use Firefox Network panel and 'copy as cURL'.
+Then run that command on the server and store as cells.txt.gz.
+
+Then run:
+
+    cat cells.txt.gz | gunzip - > cells.txt
     cat schema.sql | sqlite3 cells.sqlite
     cat import.sql | sqlite3 cells.sqlite
-
-Create the virtual environment
-
-    virtualenv .
-    . bin/activate
-    pip install -r requirements.txt
 
 ## Running
 Start the server
 
-    bottle.py opencellid:app
+    npm install
+    node opencellid.js
 
-See `bottle.py --help` for more options (port, server, ...).
+Use environment variables PORT and IP for different port/host.
 
 ## Query
 
-    curl -s 'http://localhost:8080/?mcc=228&mnc=1&lac=505&cellid=10545' | python -mjson.tool
+    curl -s 'http://localhost:5265/?mcc=228&mnc=1&lac=505&cellid=10545'
 
 The outout is a JSON string containing the latitude, longitude and the range (accuracy radius in meters)
 
 ## License
-Copyright (c) 2012 Frédéric Junod <frederic.junod@gmail.com>
-
 Released under the [WTFPL version 2](http://sam.zoy.org/wtfpl/).

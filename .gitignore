@@ -1,0 +1,5 @@
+cells.txt
+node_modules/
+*.log
+*.pyc
+*.sqlite
