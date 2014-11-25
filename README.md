@@ -1,7 +1,9 @@
-# opencellid
+# Self hosted OpenCellID server
 
 An [OpenCellID](http://www.opencellid.org/) HTTP server, inspired by the original work
 from [Frédéric Junod](https://github.com/fredj/opencellid).
+You'll want to use this if you either don't want to rely on OpenCellID to stay
+online, or when you're a commercial user of OpenCellID.
 
 ## Install
 
@@ -18,18 +20,22 @@ Then run:
     cat import.sql | sqlite3 cells.sqlite
 
 ## Running
+
 Start the server
 
     npm install
     node opencellid.js
 
-Use environment variables PORT and IP for different port/host.
+Use environment variables PORT and IP for different port/host. F.e.:
+
+    PORT=1337 node opencellid.js
 
 ## Query
 
     curl -s 'http://localhost:5265/?mcc=228&mnc=1&lac=505&cellid=10545'
 
-The outout is a JSON string containing the latitude, longitude and the range (accuracy radius in meters)
+The outout is a JSON object that has lat, lon and range.
 
 ## License
+
 Released under the [WTFPL version 2](http://sam.zoy.org/wtfpl/).

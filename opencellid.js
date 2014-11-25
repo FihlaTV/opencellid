@@ -7,7 +7,8 @@ var db = new sqlite3.Database(Path.join(__dirname, 'cells.sqlite'));
 http.createServer(function(req, res) {
   var url = Url.parse(req.url, true);
 
-  console.log('Hello', req.method, url.pathname, url.query)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
   if (req.method === 'GET' && url.pathname === '/') {
     if (!url.query.mcc || !url.query.mnc || !url.query.lac || !url.query.cellid) {
@@ -20,15 +21,22 @@ http.createServer(function(req, res) {
       3: url.query.lac,
       4: url.query.cellid
     }, function(err, rows) {
-      console.log('hi', err, rows);
       if (err) {
         res.writeHead(500);
         res.end(JSON.stringify(err));
         return;
       }
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(rows));
+      // @todo handle 0 rows properly and check dataset whether more than
+      // 1 is actually possible
+      if (rows.length !== 1) {
+        res.writeHead(500);
+        res.end('Expected 1 row, but got', rows.length);
+        return;
+      }
+
+      res.writeHead(200, { 'Content-Type': 'application/json  ' });
+      res.end(JSON.stringify(rows[0]));
     });
   }
   else {
