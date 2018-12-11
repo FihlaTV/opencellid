@@ -5,6 +5,10 @@ from [Frédéric Junod](https://github.com/fredj/opencellid).
 You'll want to use this if you either don't want to rely on OpenCellID to stay
 online, or when you're a commercial user of OpenCellID.
 
+If you're interested in this project, you are probably also interested in
+transmeyer's **[cell-geolocation](https://github.com/tramseyer/cell-geolocation)**
+project. It combines OpenCellID with other data sources.
+
 ## Install
 
 Download and create an sqlite database from the csv data that you can get from
